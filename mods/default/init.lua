@@ -388,6 +388,24 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = 'default:goldblock',
+	recipe = {
+		{'default:gold_ingot', 'default:gold_ingot', 'default:gold_ingot'},
+		{'default:gold_ingot', 'default:gold_ingot', 'default:gold_ingot'},
+		{'default:gold_ingot', 'default:gold_ingot', 'default:gold_ingot'},
+	}
+})
+
+minetest.register_craft({
+	output = 'default:diamondblock',
+	recipe = {
+		{'default:diamond_lump', 'default:diamond_lump', 'default:diamond_lump'},
+		{'default:diamond_lump', 'default:diamond_lump', 'default:diamond_lump'},
+		{'default:diamond_lump', 'default:diamond_lump', 'default:diamond_lump'},
+	}
+})
+
+minetest.register_craft({
 	output = 'default:sandstone',
 	recipe = {
 		{'default:sand', 'default:sand'},
@@ -1508,6 +1526,22 @@ minetest.register_node("default:mossycobble", {
 minetest.register_node("default:steelblock", {
 	description = "Steel Block",
 	tiles = {"default_steel_block.png"},
+	is_ground_content = true,
+	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:goldblock", {
+	description = "Gold Block",
+	tiles = {"default_gold_block.png"},
+	is_ground_content = true,
+	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:diamondblock", {
+	description = "Diamond Block",
+	tiles = {"default_diamond_block.png"},
 	is_ground_content = true,
 	groups = {snappy=1,bendy=2,cracky=1,melty=2,level=2},
 	sounds = default.node_sound_stone_defaults(),
