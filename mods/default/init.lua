@@ -483,6 +483,12 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
+	output = "default:gold_ingot",
+	recipe = "default:gold_lump",
+})
+
+minetest.register_craft({
+	type = "cooking",
 	output = "default:clay_brick",
 	recipe = "default:clay_lump",
 })
@@ -729,6 +735,24 @@ minetest.register_node("default:stone_with_iron", {
 	is_ground_content = true,
 	groups = {cracky=3},
 	drop = 'default:iron_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:stone_with_gold", {
+	description = "Gold Ore",
+	tiles = {"default_stone.png^default_mineral_gold.png"},
+	is_ground_content = true,
+	groups = {cracky=3},
+	drop = 'default:gold_lump',
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("default:stone_with_diamond", {
+	description = "Diamond Lump",
+	tiles = {"default_stone.png^default_mineral_diamond.png"},
+	is_ground_content = true,
+	groups = {cracky=3},
+	drop = 'default:diamond_lump',
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1581,6 +1605,16 @@ minetest.register_craftitem("default:iron_lump", {
 	inventory_image = "default_iron_lump.png",
 })
 
+minetest.register_craftitem("default:gold_lump", {
+	description = "Gold Lump",
+	inventory_image = "default_gold_lump.png",
+})
+
+minetest.register_craftitem("default:diamond_lump", {
+	description = "Diamond Lump",
+	inventory_image = "default_diamond_lump.png",
+})
+
 minetest.register_craftitem("default:clay_lump", {
 	description = "Clay Lump",
 	inventory_image = "default_clay_lump.png",
@@ -1589,6 +1623,11 @@ minetest.register_craftitem("default:clay_lump", {
 minetest.register_craftitem("default:steel_ingot", {
 	description = "Steel Ingot",
 	inventory_image = "default_steel_ingot.png",
+})
+
+minetest.register_craftitem("default:gold_ingot", {
+	description = "Gold Ingot",
+	inventory_image = "default_gold_ingot.png",
 })
 
 minetest.register_craftitem("default:clay_brick", {
