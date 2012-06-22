@@ -143,14 +143,14 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+6, 1/24/24/24, 6,27, -31000, -64)
 
 	-- needs tweaking!
-	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+1, 1/12/12/12, 2, 3,    -15,   2)
-	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+2, 1/9/9/9,    3, 5,    -63, -16)
-	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+3, 1/7/7/7,    3, 5, -31000, -64)
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+8, 1/12/12/12, 2, 3,    -15,   2)
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+9, 1/9/9/9,    3, 5,    -63, -16)
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+10, 1/7/7/7,    3, 5, -31000, -64)
 
 	-- needs tweaking!
-	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+1, 1/12/12/12, 2, 3,    -15,   2)
-	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+2, 1/9/9/9,    3, 5,    -63, -16)
-	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+3, 1/7/7/7,    3, 5, -31000, -64)
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+11, 1/12/12/12, 2, 3,    -15,   2)
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+12, 1/9/9/9,    3, 5,    -63, -16)
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+13, 1/7/7/7,    3, 5, -31000, -64)
 
 	if maxp.y >= 2 and minp.y <= 0 then
 		-- Generate clay
