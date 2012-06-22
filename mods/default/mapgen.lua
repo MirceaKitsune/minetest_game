@@ -21,6 +21,8 @@ minetest.register_alias("mapgen_dirt_with_grass", "default:dirt_with_grass")
 minetest.register_alias("mapgen_junglegrass", "default:junglegrass")
 minetest.register_alias("mapgen_stone_with_coal", "default:stone_with_coal")
 minetest.register_alias("mapgen_stone_with_iron", "default:stone_with_iron")
+minetest.register_alias("mapgen_stone_with_gold", "default:stone_with_gold")
+minetest.register_alias("mapgen_stone_with_diamond", "default:stone_with_diamond")
 minetest.register_alias("mapgen_mese", "default:mese")
 minetest.register_alias("mapgen_desert_sand", "default:desert_sand")
 minetest.register_alias("mapgen_desert_stone", "default:desert_stone")
@@ -139,6 +141,16 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	
 	generate_ore("default:stone_with_coal", "default:stone", minp, maxp, seed+7, 1/24/24/24, 6,27, -31000,  0)
 	generate_ore("default:stone_with_iron", "default:stone", minp, maxp, seed+6, 1/24/24/24, 6,27, -31000, -64)
+
+	-- needs tweaking!
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+1, 1/12/12/12, 2, 3,    -15,   2)
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+2, 1/9/9/9,    3, 5,    -63, -16)
+	generate_ore("default:stone_with_gold", "default:stone", minp, maxp, seed+3, 1/7/7/7,    3, 5, -31000, -64)
+
+	-- needs tweaking!
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+1, 1/12/12/12, 2, 3,    -15,   2)
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+2, 1/9/9/9,    3, 5,    -63, -16)
+	generate_ore("default:stone_with_diamond", "default:stone", minp, maxp, seed+3, 1/7/7/7,    3, 5, -31000, -64)
 
 	if maxp.y >= 2 and minp.y <= 0 then
 		-- Generate clay
