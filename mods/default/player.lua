@@ -5,10 +5,9 @@
 
 -- Set mesh for all players
 function switch_player_visual()
-	local modpath = minetest.get_modpath("default")
 	prop = {
-		mesh=modpath.."/models/player.obj",
-		textures = {modpath.."/models/player.png", },
+		mesh="player.obj",
+		textures = {"player.png", },
 		visual="mesh",
 	}
 	for _, obj in pairs(minetest.get_connected_players()) do
