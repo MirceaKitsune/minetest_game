@@ -9,6 +9,7 @@ function switch_player_visual()
 		mesh="player.obj",
 		textures = {"player.png", },
 		visual="mesh",
+		visual_size={x=1, y=1},
 	}
 	for _, obj in pairs(minetest.get_connected_players()) do
 		obj:set_properties(prop)
