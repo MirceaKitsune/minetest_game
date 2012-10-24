@@ -6,7 +6,7 @@
 -- Set mesh for all players
 function switch_player_visual()
 	prop = {
-		mesh="player.b3d",
+		mesh="player.x",
 		textures = {"player.png", },
 		visual="mesh",
 		visual_size={x=1, y=1},
