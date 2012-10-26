@@ -10,12 +10,11 @@ function switch_player_visual()
 		textures = {"player.png", },
 		visual = "mesh",
 		visual_size = {x=1, y=1},
-		--animation_bone_position = {"Bone", {x=0, y=0, z=0}},
-		--animation_bone_rotation = {"Bone", {x=0, y=0, z=0}},
 	}
 	for _, obj in pairs(minetest.get_connected_players()) do
 		obj:set_properties(prop)
-		obj:setanimations({x=1, y=50}, 35, 0)
+		obj:set_animations({x=1, y=50}, 35, 0)
+		--obj:set_bone_posrot("", {x=0,y=0,z=0}, {x=0,y=0,z=0})
 	end
 	minetest.after(1.0, switch_player_visual)
 end
