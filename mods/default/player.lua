@@ -8,18 +8,44 @@ function switch_player_visual()
 	prop = {
 		mesh = "player.x",
 		textures = {"player.png", },
+		colors = {{255, 255, 255, 255}, },
 		visual = "mesh",
 		visual_size = {x=1, y=1},
-		colors = {{255, 255, 255, 255}, },
 	}
+	
 	for _, obj in pairs(minetest.get_connected_players()) do
 		obj:set_properties(prop)
 		obj:set_animations({x=1, y=50}, 35, 0)
 		--obj:set_bone_posrot("", {x=0,y=0,z=0}, {x=0,y=0,z=0})
 	end
+
 	minetest.after(1.0, switch_player_visual)
 end
 minetest.after(1.0, switch_player_visual)
+
+-- Test case for attachments: An object is spawned and attached to the player with the specified name (use your own playername there) 10 seconds after the server starts
+function attachments()
+	prop = {
+		mesh = "player.x",
+		textures = {"player.png", },
+		colors = {{255, 255, 255, 255}, },
+		visual = "mesh",
+		visual_size = {x=1, y=1},
+	}
+
+	local pos={x=0,y=0,z=0}
+	local newobject=minetest.env:add_entity(pos, "test:test2")
+	newobject:set_properties(prop)
+	newobject:set_animations({x=1, y=50}, 35, 0)
+
+	for _, obj in pairs(minetest.get_connected_players()) do
+		if(obj:get_player_name() == "MirceaKitsune") then
+			newobject:set_attachment(obj, "Bone", {x=0,y=0,z=0}, {x=0,y=0,z=0})
+			print ("Attached test object to "..obj:get_player_name())
+		end
+	end
+end
+minetest.after(10.0, attachments)
 
 -- Definitions made by this mod that other mods can use too
 default = {}
