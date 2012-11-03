@@ -24,6 +24,13 @@ end
 minetest.after(1.0, switch_player_visual)
 
 -- Test case for attachments: An object is spawned and attached to the player with the specified name (use your own playername there) 10 seconds after the server starts
+test2 = {
+  collisionbox = { 0, 0, 0, 0, 0, 0 },
+  visual = "cube"
+}
+
+minetest.register_entity("default:test2", test2)
+
 function attachments()
 	prop = {
 		mesh = "player.x",
@@ -34,17 +41,18 @@ function attachments()
 	}
 
 	local pos={x=0,y=0,z=0}
-	local newobject=minetest.env:add_entity(pos, "test:test2")
+	local newobject=minetest.env:add_entity(pos, "default:test2")
 	newobject:set_properties(prop)
 	newobject:set_animations({x=1, y=50}, 35, 0)
 
 	for _, obj in pairs(minetest.get_connected_players()) do
-		if(obj:get_player_name() == "MirceaKitsune") then
+		if(obj:get_player_name() == "some_nick") then
 			newobject:set_attachment(obj, "Bone", {x=0,y=0,z=0}, {x=0,y=0,z=0})
 			print ("Attached test object to "..obj:get_player_name())
 		end
 	end
 end
+
 minetest.after(10.0, attachments)
 
 -- Definitions made by this mod that other mods can use too
