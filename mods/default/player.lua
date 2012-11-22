@@ -1,16 +1,15 @@
 -- Minetest 0.4 mod: player
 -- See README.txt for licensing and other information.
 
--- Default player appearance.
-player_model = "character.x"
-player_texture = "character.png"
-
 -- Animation speed
 animation_speed = 30
-
--- Animation blending / transitioning amount
+-- Animation blending
 -- Note: This is currently broken due to a bug in Irrlicht, leave at 0
 animation_blend = 0
+
+-- Default player appearance
+player_model = "character.x"
+player_texture = "character.png"
 
 -- Frame ranges for each player model
 function player_get_animations(model)
