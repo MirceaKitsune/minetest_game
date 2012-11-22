@@ -23,6 +23,8 @@ animation_player_walk_left_START = 144
 animation_player_walk_left_END = 163
 animation_player_mine_START = 165
 animation_player_mine_END = 179
+animation_player_death_START = 181
+animation_player_death_END = 200
 
 -- Set mesh for all players
 function switch_player_visual()
@@ -35,7 +37,7 @@ function switch_player_visual()
 
 	for _, obj in pairs(minetest.get_connected_players()) do
 		obj:set_properties(prop)
-		obj:set_animation({x=animation_player_stand_START, y=animation_player_stand_END}, animation_speed, animation_blend)
+		obj:set_animation({x=animation_player_death_START, y=animation_player_death_END}, animation_speed, animation_blend)
 	end
 
 	minetest.after(10.0, switch_player_visual)
