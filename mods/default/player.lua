@@ -1,16 +1,19 @@
 -- Minetest 0.4 mod: player
 -- See README.txt for licensing and other information.
 
--- The API documentation in here was moved into doc/lua_api.txt
+-- Default player appearance.
+player_model = "character.x"
+player_texture = "character.png"
 
--- Default animation speed. Special animations (such as the walk animation) should be offset from this factor
+-- Animation speed
 animation_speed = 30
 
 -- Animation blending / transitioning amount
+-- Note: This is currently broken due to a bug in Irrlicht, leave at 0
 animation_blend = 0
 
--- Animations frame ranges:
--- For player.x:
+-- Frame ranges for each animation of each model:
+-- player.x:
 animation_player_stand_START = 0
 animation_player_stand_END = 79
 animation_player_walk_forward_START = 81
@@ -26,29 +29,19 @@ animation_player_mine_END = 179
 animation_player_death_START = 181
 animation_player_death_END = 200
 
--- Set mesh for all players
-function switch_player_visual()
+-- Called whenever a player's appearance needs to be updated
+function player_update_visuals(player)
 	prop = {
-		mesh = "character.x",
-		textures = {"character.png", },
+		mesh = player_model,
+		textures = {player_texture, },
 		visual = "mesh",
 		visual_size = {x=1, y=1},
 	}
-
-	for _, obj in pairs(minetest.get_connected_players()) do
-		obj:set_properties(prop)
-		obj:set_animation({x=animation_player_death_START, y=animation_player_death_END}, animation_speed, animation_blend)
-	end
-
-	minetest.after(10.0, switch_player_visual)
+	player:set_properties(prop)
+	player:set_animation({x=animation_player_death_START, y=animation_player_death_END}, animation_speed, animation_blend)
 end
-minetest.after(10.0, switch_player_visual)
 
--- Definitions made by this mod that other mods can use too
-default = {}
-
--- Load other files
-dofile(minetest.get_modpath("default").."/mapgen.lua")
-dofile(minetest.get_modpath("default").."/leafdecay.lua")
+-- Set appearance when the player joins
+minetest.register_on_joinplayer(player_update_visuals)
 
 -- END
