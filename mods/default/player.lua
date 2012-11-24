@@ -29,11 +29,11 @@ function player_get_animations(model)
 		walk_START = 81,
 		walk_END = 100,
 		mine_START = 102,
-		mine_END = 116,
-		walk_mine_START = 118,
-		walk_mine_END = 137,
-		death_START = 139,
-		death_END = 158
+		mine_END = 111,
+		walk_mine_START = 113,
+		walk_mine_END = 132,
+		death_START = 134,
+		death_END = 153
 		}
 	end
 end
