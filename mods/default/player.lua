@@ -46,6 +46,11 @@ end
 
 -- Called whenever a player's appearance needs to be updated
 function player_update_visuals(player)
+	player_model[player:get_player_name()] = default_model
+	player_anim[player:get_player_name()] = ANIM_STAND
+
+	local name = player:get_player_name()
+	local anim = player_get_animations(player_model[name])
 	prop = {
 		mesh = default_model,
 		textures = {default_texture, },
@@ -53,8 +58,7 @@ function player_update_visuals(player)
 		visual_size = {x=1, y=1},
 	}
 	player:set_properties(prop)
-	player_anim[player:get_player_name()] = ANIM_STAND
-	player_model[player:get_player_name()] = default_model
+	player:set_animation({x=anim.stand_START, y=anim.stand_END}, animation_speed, animation_blend) -- initial animation
 end
 
 -- Update appearance when the player joins
@@ -64,8 +68,8 @@ minetest.register_on_joinplayer(player_update_visuals)
 function on_step(dtime)
 	for _, pl in pairs(minetest.get_connected_players()) do
 		local name = pl:get_player_name()
-		local controls = pl:get_player_control()
 		local anim = player_get_animations(player_model[name])
+		local controls = pl:get_player_control()
 
 		if controls.up then
 			if player_anim[name] ~= ANIM_WALK_FORWARD then
