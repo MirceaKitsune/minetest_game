@@ -50,4 +50,24 @@ end
 -- Update appearance when the player joins
 minetest.register_on_joinplayer(player_update_visuals)
 
+-- Player states, used to know when to change animations
+local player_anim = {}
+local ANIM_STAND = 1
+local ANIM_WALK_FORWARD = 2
+local ANIM_WALK_BACKWARD = 3
+local ANIM_WALK_LEFT = 4
+local ANIM_WALK_RIGHT = 5
+local ANIM_MINE = 6
+local ANIM_DEATH = 7
+
+-- Global environment step function
+function on_step(dtime)
+	for _, obj in pairs(minetest.get_connected_players()) do
+		if(player_anim[obj:get_player_name()] == 0) then
+			print("on_step")
+		end
+	end
+end
+minetest.register_globalstep(on_step)
+
 -- END
