@@ -15,12 +15,10 @@ default_texture = "character.png"
 local player_model = {}
 local player_anim = {}
 local ANIM_STAND = 0
-local ANIM_WALK_FORWARD = 1
-local ANIM_WALK_BACKWARD = 2
-local ANIM_WALK_LEFT = 3
-local ANIM_WALK_RIGHT = 4
-local ANIM_MINE = 5
-local ANIM_DEATH = 6
+local ANIM_WALK  = 1
+local ANIM_WALK_MINE = 2
+local ANIM_MINE = 3
+local ANIM_DEATH = 4
 
 -- Frame ranges for each player model
 function player_get_animations(model)
@@ -28,18 +26,14 @@ function player_get_animations(model)
 		return {
 		stand_START = 0,
 		stand_END = 79,
-		walk_forward_START = 81,
-		walk_forward_END = 100,
-		walk_backward_START = 102,
-		walk_backward_END = 121,
-		walk_right_START = 123,
-		walk_right_END = 142,
-		walk_left_START = 144,
-		walk_left_END = 163,
-		mine_START = 165,
-		mine_END = 179,
-		death_START = 181,
-		death_END = 200
+		walk_START = 81,
+		walk_END = 100,
+		mine_START = 102,
+		mine_END = 116,
+		walk_mine_START = 118,
+		walk_mine_END = 137,
+		death_START = 139,
+		death_END = 158
 		}
 	end
 end
@@ -71,34 +65,29 @@ function on_step(dtime)
 		local anim = player_get_animations(player_model[name])
 		local controls = pl:get_player_control()
 
-		if controls.up then
-			if player_anim[name] ~= ANIM_WALK_FORWARD then
-				pl:set_animation({x=anim.walk_forward_START, y=anim.walk_forward_END}, animation_speed, animation_blend)
-				player_anim[name] = ANIM_WALK_FORWARD
+		local moving = false
+		if controls.up or controls.down or controls.left or controls.right then
+			moving = true
+		end
+
+		if moving and controls.LMB then
+			if player_anim[name] ~= ANIM_WALK_MINE then
+				pl:set_animation({x=anim.walk_mine_START, y=anim.walk_mine_END}, animation_speed, animation_blend)
+				player_anim[name] = ANIM_WALK_MINE
 			end
-		elseif controls.down then
-			if player_anim[name] ~= ANIM_WALK_BACKWARD then
-				pl:set_animation({x=anim.walk_backward_START, y=anim.walk_backward_END}, animation_speed, animation_blend)
-				player_anim[name] = ANIM_WALK_BACKWARD
-			end
-		elseif controls.left then
-			if player_anim[name] ~= ANIM_WALK_LEFT then
-				pl:set_animation({x=anim.walk_left_START, y=anim.walk_left_END}, animation_speed, animation_blend)
-				player_anim[name] = ANIM_WALK_LEFT
-			end
-		elseif controls.right then
-			if player_anim[name] ~= ANIM_WALK_RIGHT then
-				pl:set_animation({x=anim.walk_right_START, y=anim.walk_right_END}, animation_speed, animation_blend)
-				player_anim[name] = ANIM_WALK_RIGHT
+		elseif moving then
+			if player_anim[name] ~= ANIM_WALK then
+				pl:set_animation({x=anim.walk_START, y=anim.walk_END}, animation_speed, animation_blend)
+				player_anim[name] = ANIM_WALK
 			end
 		elseif controls.LMB then
 			if player_anim[name] ~= ANIM_MINE then
 				pl:set_animation({x=anim.mine_START, y=anim.mine_END}, animation_speed, animation_blend)
 				player_anim[name] = ANIM_MINE
 			end
-		elseif player_anim[name] ~= ANIM_WALK_STAND then
+		elseif player_anim[name] ~= ANIM_STAND then
 			pl:set_animation({x=anim.stand_START, y=anim.stand_END}, animation_speed, animation_blend)
-			player_anim[name] = ANIM_WALK_STAND
+			player_anim[name] = ANIM_STAND
 		end
 	end
 end
