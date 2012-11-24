@@ -87,6 +87,11 @@ function on_step(dtime)
 				pl:set_animation({x=anim.walk_right_START, y=anim.walk_right_END}, animation_speed, animation_blend)
 				player_anim[name] = ANIM_WALK_RIGHT
 			end
+		elseif controls.LMB then
+			if player_anim[name] ~= ANIM_MINE then
+				pl:set_animation({x=anim.mine_START, y=anim.mine_END}, animation_speed, animation_blend)
+				player_anim[name] = ANIM_MINE
+			end
 		elseif player_anim[name] ~= ANIM_WALK_STAND then
 			pl:set_animation({x=anim.stand_START, y=anim.stand_END}, animation_speed, animation_blend)
 			player_anim[name] = ANIM_WALK_STAND
