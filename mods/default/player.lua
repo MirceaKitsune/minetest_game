@@ -14,6 +14,7 @@ default_texture = "character.png"
 -- Player states
 local player_model = {}
 local player_anim = {}
+local player_sneak = {}
 local ANIM_STAND = 0
 local ANIM_WALK  = 1
 local ANIM_WALK_MINE = 2
@@ -65,28 +66,44 @@ function on_step(dtime)
 		local anim = player_get_animations(player_model[name])
 		local controls = pl:get_player_control()
 
-		local moving = false
+		local walking = false
 		if controls.up or controls.down or controls.left or controls.right then
-			moving = true
+			walking = true
 		end
 
-		if moving and controls.LMB then
+		local animation_speed_modified = animation_speed
+		if controls.sneak and (walking or controls.LMB) then
+			animation_speed_modified = animation_speed_modified / 2
+			-- Refresh player animation below
+			if not player_sneak[name] then
+				player_anim[name] = -1
+				player_sneak[name] = true
+			end
+		else
+			-- Refresh player animation below
+			if player_sneak[name] then
+				player_anim[name] = -1
+				player_sneak[name] = false
+			end
+		end
+
+		if walking and controls.LMB then
 			if player_anim[name] ~= ANIM_WALK_MINE then
-				pl:set_animation({x=anim.walk_mine_START, y=anim.walk_mine_END}, animation_speed, animation_blend)
+				pl:set_animation({x=anim.walk_mine_START, y=anim.walk_mine_END}, animation_speed_modified, animation_blend)
 				player_anim[name] = ANIM_WALK_MINE
 			end
-		elseif moving then
+		elseif walking then
 			if player_anim[name] ~= ANIM_WALK then
-				pl:set_animation({x=anim.walk_START, y=anim.walk_END}, animation_speed, animation_blend)
+				pl:set_animation({x=anim.walk_START, y=anim.walk_END}, animation_speed_modified, animation_blend)
 				player_anim[name] = ANIM_WALK
 			end
 		elseif controls.LMB then
 			if player_anim[name] ~= ANIM_MINE then
-				pl:set_animation({x=anim.mine_START, y=anim.mine_END}, animation_speed, animation_blend)
+				pl:set_animation({x=anim.mine_START, y=anim.mine_END}, animation_speed_modified, animation_blend)
 				player_anim[name] = ANIM_MINE
 			end
 		elseif player_anim[name] ~= ANIM_STAND then
-			pl:set_animation({x=anim.stand_START, y=anim.stand_END}, animation_speed, animation_blend)
+			pl:set_animation({x=anim.stand_START, y=anim.stand_END}, animation_speed_modified, animation_blend)
 			player_anim[name] = ANIM_STAND
 		end
 	end
